@@ -83,12 +83,16 @@ function movie(r) {
 }
 
 function song() {
-    console.log(stupidfy)
-    stupidfy.search({ type: 'track', query: input }, function (err, data) {
+    if (r === undefined) {
+        r = input
+    }
+    stupidfy.search({ type: 'track', query: r }, function (err, data) {
         if (err) {
             return console.log('Error occurred: ' + err);
         }
-        console.log(data.tracks.items[0]);
+        var d = data.tracks.items[0]
+        console.log("Artist: " + d.album.artists[0].name + "\n" + "Track: " + d.name + "\n" + d.external_urls.spotify + "\n" + "Album: " + d.album.name);
+        console.log("_______________________________________")
     });
 }
 
@@ -129,5 +133,77 @@ else if (comm === "do-what-it-says") {
     dothis()
 }
 else {
-    console.log("Command not recognized");
+    console.log("I urge you to give a proper command, human");
 }
+
+// {
+//     album:
+//     {
+//         album_type: 'album',
+//             artists: [[Object]],
+//                 available_markets:
+//         ['AT',
+//             'BE',
+//             'CA',
+//             'CH',
+//             'DE',
+//             'ES',
+//             'FR',
+//             'GB',
+//             'IE',
+//             'IT',
+//             'LU',
+//             'NL',
+//             'US'],
+//             external_urls:
+//         { spotify: 'https://open.spotify.com/album/6lj5yJ6EevwWGpNMYClMyv' },
+//         href: 'https://api.spotify.com/v1/albums/6lj5yJ6EevwWGpNMYClMyv',
+//             id: '6lj5yJ6EevwWGpNMYClMyv',
+//                 images: [[Object], [Object], [Object]],
+//                     name: 'A Twist In The Myth',
+//                         release_date: '2006-09-01',
+//                             release_date_precision: 'day',
+//                                 total_tracks: 11,
+//                                     type: 'album',
+//                                         uri: 'spotify:album:6lj5yJ6EevwWGpNMYClMyv'
+//     },
+//     artists:
+//     [{
+//         external_urls: [Object],
+//         href: 'https://api.spotify.com/v1/artists/7jxJ25p0pPjk0MStloN6o6',
+//         id: '7jxJ25p0pPjk0MStloN6o6',
+//         name: 'Blind Guardian',
+//         type: 'artist',
+//         uri: 'spotify:artist:7jxJ25p0pPjk0MStloN6o6'
+//     }],
+//         available_markets:
+//     ['AT',
+//         'BE',
+//         'CA',
+//         'CH',
+//         'DE',
+//         'ES',
+//         'FR',
+//         'GB',
+//         'IE',
+//         'IT',
+//         'LU',
+//         'NL',
+//         'US'],
+//         disc_number: 1,
+//             duration_ms: 244897,
+//                 explicit: false,
+//                     external_ids: { isrc: 'DED830693511' },
+//     external_urls:
+//     { spotify: 'https://open.spotify.com/track/26u1TE0P1pLmUDyLzkitI1' },
+//     href: 'https://api.spotify.com/v1/tracks/26u1TE0P1pLmUDyLzkitI1',
+//         id: '26u1TE0P1pLmUDyLzkitI1',
+//             is_local: false,
+//                 name: 'Carry The Blessed Home',
+//                     popularity: 23,
+//                         preview_url:
+//     'https://p.scdn.co/mp3-preview/adb5535373527e4ab4a78ab540d768fcdfe4d741?cid=73cc80dfabb9460d95f88b4864ae4e71',
+//         track_number: 5,
+//             type: 'track',
+//                 uri: 'spotify:track:26u1TE0P1pLmUDyLzkitI1'
+// }
